@@ -1,6 +1,6 @@
 # Van Emde Boas
 
-# T0-DO Implementation
+# TO-DO Implementation
 1. Initialize
 2. Insert
 3. Delete
