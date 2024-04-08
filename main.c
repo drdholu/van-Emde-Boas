@@ -7,7 +7,7 @@ int main() {
     vEB_insert(tree, 10);
     vEB_insert(tree, 4);
     vEB_insert(tree, 12);
-    printf("%d\n", vEB_predecessor(tree, 4)); 
-    printf("%d\n", vEB_successor(tree, 12)); // -1
+    printf("%d\n", vEB_predecessor(tree, 7)); 
+    printf("%d\n", vEB_successor(tree, 12));
     return 0;
 }
