@@ -7,6 +7,38 @@
 4. ~~Successor~~
 5. ~~Predeccessor~~
 
-# Application ideas
+# Allocation system ideas
 
-1. Allocation system
+```
+Data strucutres ideas
+
+tree structure{
+    universe
+    min, max
+    summary
+    clusters
+}
+
+Student structure{
+    name
+    roll
+    marks
+}
+
+college structure{
+    name
+    branch ptr
+}
+
+branch structure{
+    seats
+    cutoff
+}
+
+```
+
+- Insert all college cutoff's in bit vector
+- Find successor of student's marks and assign college
+    - check for avail seats
+- Extra functions we can perform
+    - sorting??
