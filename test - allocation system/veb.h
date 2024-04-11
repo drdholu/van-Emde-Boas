@@ -5,7 +5,8 @@
 
 #define EMPTY -1
 #define MAX_PREFS 3
-#define CSV_FILENAME "data.csv"
+#define CSV_FILENAME "college.csv"
+#define CSV_STUDENT_FILENAME "students.csv"
 
 typedef struct Branch {
     int cutoff;
@@ -28,12 +29,7 @@ typedef struct vebtree {
     struct vebtree** cluster;
 } vebtree;
 
-void swap(int* a, int* b) {
-    int temp = *a;
-    *a = *b;
-    *b = temp;
-}
-
+void swap(int* a, int* b);
 vebtree* create(int universeSize);
 int high(struct vebtree* V, int x);
 int low(struct vebtree* V, int x);
@@ -45,3 +41,6 @@ int maximum(struct vebtree* V);
 int predecessor(struct vebtree* V, int x);
 void dealloc_vebtree(struct vebtree* V);
 void read_branch_data_from_csv(Branch branches[], int* num_branches);
+void read_student_data_from_csv(Student students[], int* num_students);
+void allocate_branches_to_students(Student students[], int num_students, Branch branches[], int num_branches, vebtree* cutoff_veb);
+void write_allocated_branches_to_csv(Student students[], int num_students);

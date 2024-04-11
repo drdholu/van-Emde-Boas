@@ -14,45 +14,19 @@ int main() {
         insert(cutoff_veb, branches[i].cutoff);
     }
 
-    Student student;
-    char choice;
-    do {
-        printf("Enter student roll number: ");
-        scanf("%d", &student.roll);
-        printf("Enter student marks: ");
-        scanf("%d", &student.marks);
-        printf("Enter student branch preferences (up to %d branches):\n", MAX_PREFS);
-        for (int i = 0; i < MAX_PREFS; i++) {
-            printf("Preference %d: ", i + 1);
-            scanf("%s", student.preference[i]);
-        }
+    Student students[10];
+    int num_students;
+    read_student_data_from_csv(students, &num_students);
 
-        int branch_index = predecessor_index(cutoff_veb, student.marks);
-        // int cutoff_index = low(cutoff_veb->cluster[high(cutoff_veb, branch_index)], branch_index);
-        // printf("Cutoff index %d\n");
-        // int branch_index = predecessor_index(cutoff_veb, student.marks);
-        int cutoff_index = -1;
-        for (int i = 0; i < num_branches; ++i) {
-            if (branches[i].cutoff == branch_index) {
-                cutoff_index = i;
-                break;
-            }
-        }
+    // Allocate branches to students
+    allocate_branches_to_students(students, num_students, branches, num_branches, cutoff_veb);
 
-        if (cutoff_index != -1) {
-            printf("Branch allocated for student with roll number %d: %s\n", student.roll, branches[cutoff_index].name);
-        } else {
-            printf("No branch allocated for student with roll number %d.\n", student.roll);
-        }
-
-        printf("Do you want to continue? (Y/N): ");
-        scanf(" %c", &choice);
-    } while (choice == 'Y' || choice == 'y');
+    // Write allocated branches along with student roll numbers and marks to a new CSV file
+    write_allocated_branches_to_csv(students, num_students);
 
     dealloc_vebtree(cutoff_veb);
 
     return 0;
 }
-
 
 
