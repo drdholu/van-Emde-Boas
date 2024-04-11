@@ -83,9 +83,9 @@ void deleteVEB(struct vebtree* V, int x) {
             x = veb_index(V, firstCluster, minimum(V->cluster[firstCluster]));
             V->min = x;
         }
-        delete(V->cluster[high(V, x)], low(V, x));
+        deleteVEB(V->cluster[high(V, x)], low(V, x));
         if (minimum(V->cluster[high(V, x)]) == EMPTY) {
-            delete(V->summary, high(V, x));
+            deleteVEB(V->summary, high(V, x));
             if (x == V->max) {
                 int summaryMax = maximum(V->summary);
                 if (summaryMax == EMPTY)
