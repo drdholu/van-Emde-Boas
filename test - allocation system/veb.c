@@ -217,45 +217,52 @@ void read_student_data_from_csv(Student students[], int* num_students) {
     printf("Read %d students.\n", *num_students);
 }
 
-
 void allocate_branches_to_students(Student students[], int num_students, Branch branches[], int num_branches, vebtree* cutoff_veb) {
     for (int i = 0; i < num_students; i++) {
         int branch_index = predecessor_index(cutoff_veb, students[i].marks);
-        int cutoff_index = -1;
-        for (int j = 0; j < num_branches; ++j) {
-            if (branches[j].cutoff == branch_index) {
-                cutoff_index = j;
-                break;
+        int preference_index = -1;
+        while (branch_index != -1) {
+            for (int j = 0; j < num_branches; ++j) {
+                if (branches[j].cutoff == branch_index && branches[j].seats > 0) {
+                    // Allocate branch to student
+                    strcpy(students[i].branchAllocated, branches[j].name);
+                    
+                    // Update available seats for the allocated branch
+                    branches[j].seats--;
+
+                    // Update the CSV file with the updated seats information
+                    FILE* file = fopen("college.csv", "w");
+                    if (file == NULL) {
+                        printf("Error opening file college.csv for updating seats.\n");
+                        exit(1);
+                    }
+
+                    // Write header
+                    fprintf(file, "Branch,Cutoff,Seats\n");
+
+                    // Write updated branch information
+                    for (int k = 0; k < num_branches; k++) {
+                        fprintf(file, "%s,%d,%d\n", branches[k].name, branches[k].cutoff, branches[k].seats);
+                    }
+
+                    fclose(file);
+
+                    // Exit loop after allocation
+                    preference_index = j;
+                    break;
+                }
             }
+            if (preference_index != -1)
+                break; // Allocation successful, exit loop
+            // Try next preference
+            branch_index = predecessor_index(cutoff_veb, branch_index);
         }
-        if (cutoff_index != -1) {
-            // Allocate branch to student
-            strcpy(students[i].branchAllocated, branches[cutoff_index].name);
-
-            // Update available seats for the allocated branch
-            branches[cutoff_index].seats--;
-
-            // Update the CSV file with the updated seats information
-            FILE* file = fopen("college.csv", "w");
-            if (file == NULL) {
-                printf("Error opening file college.csv for updating seats.\n");
-                exit(1);
-            }
-
-            // Write header
-            fprintf(file, "Branch,Cutoff,Seats\n");
-
-            // Write updated branch information
-            for (int k = 0; k < num_branches; k++) {
-                fprintf(file, "%s,%d,%d\n", branches[k].name, branches[k].cutoff, branches[k].seats);
-            }
-
-            fclose(file);
-        } else {
+        if (preference_index == -1) {
             printf("No branch allocated for student with roll number %d.\n", students[i].roll);
         }
     }
 }
+
 
 void write_allocated_branches_to_csv(Student students[], int num_students) {
     FILE* file = fopen("allocated_branches.csv", "w");
