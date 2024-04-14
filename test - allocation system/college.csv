@@ -1,9 +1,9 @@
 Branch,Cutoff,Seats
-Computer,175,10
+Computer,175,7
 ENTC,165,10
-Electrical,155,10
-Mechanical,140,10
-Civil,130,10
+Electrical,155,9
+Mechanical,140,9
+Civil,130,6
 Metallurgy,120,10
 Manufacturing,115,10
-Instrumentation,90,10
+Instrumentation,90,9

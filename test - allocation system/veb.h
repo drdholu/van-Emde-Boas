@@ -5,6 +5,7 @@
 
 #define EMPTY -1
 #define MAX_PREFS 3
+#define MAX_STD 50
 #define CSV_FILENAME "college.csv"
 #define CSV_STUDENT_FILENAME "students.csv"
 
@@ -19,6 +20,7 @@ typedef struct Student {
     int marks;
     char preference[MAX_PREFS][50];
     char branchAllocated[50];
+    int alloted;
 } Student;
 
 typedef struct vebtree {
@@ -43,4 +45,5 @@ void dealloc_vebtree(struct vebtree* V);
 void read_branch_data_from_csv(Branch branches[], int* num_branches);
 void read_student_data_from_csv(Student students[], int* num_students);
 void allocate_branches_to_students(Student students[], int num_students, Branch branches[], int num_branches, vebtree* cutoff_veb);
+// void allocate_branches_to_students(Student students[], int num_students, Branch branches[], int num_branches, vebtree* cutoff_veb, int* num_s2);
 void write_allocated_branches_to_csv(Student students[], int num_students);
