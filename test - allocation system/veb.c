@@ -250,24 +250,24 @@ void allocate_branches_to_students(Student students[], int num_students, Branch 
 
         // Read and print roll numbers
         
-        while (fscanf(allocated_file, "%d,%d,%[^\n]", &roll,&marks, alllocated) == 3 || fscanf(students_file, "%d,%d,%[^\n]", &studentRoll,&stdMarks, stdAllocated) == 3 ) {
-        // printf(CYAN"std roll -> %d\n"RESET, studentRoll);
-            if(roll == students[i].roll){
-                printf(GRAY"duplicate roll -> %d\n"RESET, roll);
-                // printf("duplicate roll 2 -> %d\n", students[i].roll);
-                rollflag_inCSV = 1;
-                break;
-            }
-            if (roll != studentRoll) {
-                printf(YELLOW"new roll -> %d\n"RESET, studentRoll);
-                rollflag_inCSV = 0;
-                break;
-            }
+        // while (fscanf(allocated_file, "%d,%d,%[^\n]", &roll,&marks, alllocated) == 3 || fscanf(students_file, "%d,%d,%[^\n]", &studentRoll,&stdMarks, stdAllocated) == 3 ) {
+        // // printf(CYAN"std roll -> %d\n"RESET, studentRoll);
+        //     if(roll == students[i].roll){
+        //         printf(GRAY"duplicate roll -> %d\n"RESET, roll);
+        //         // printf("duplicate roll 2 -> %d\n", students[i].roll);
+        //         // rollflag_inCSV = 1;
+        //         // break;
+        //     }
+        //     if (roll != studentRoll) {
+        //         printf(YELLOW"new roll -> %d\n"RESET, studentRoll);
+        //         // rollflag_inCSV = 0;
+        //         // break;
+        //     }
             
-        }
+        // }
 
         // student already exists
-        if(rollflag_inCSV == 1) continue;
+        // if(rollflag_inCSV == 1) continue;
         // else {}
 
         int branch_index = predecessor_index(cutoff_veb, students[i].marks);
@@ -282,7 +282,8 @@ void allocate_branches_to_students(Student students[], int num_students, Branch 
         // printf("%d %s", cutoff_index, branches[cutoff_index].name);
         while (branch_index != -1){
             for (int j = 0; j < num_branches; ++j) {
-                if (branches[j].cutoff == branch_index && branches[j].seats > 0) {
+                // if (branches[j].cutoff == branch_index && branches[j].seats > 0) {
+                if (branches[j].cutoff == branch_index) {
                     // Allocate branch to student
                     strcpy(students[i].branchAllocated, branches[j].name);
 
@@ -319,45 +320,44 @@ void allocate_branches_to_students(Student students[], int num_students, Branch 
                     if (!preference_matched && !branchFlag) {
                         strcpy(students[i].branchAllocated, "No Branch Allocated");
                     } 
-                    else {
-                        if(preference_matched){
-                            // Update available seats for the allocated branch
-                            if(branches[j].seats>0){
-                                branches[j].seats--;
-                            }
-                            else if(branches[j].seats == 0){
-                                strcpy(students[i].branchAllocated, "No Branch Allocated");
-                                break;
-                            }
+                    // else {
+                    //     if(preference_matched){
+                    //         // Update available seats for the allocated branch
+                    //         if(branches[j].seats>0){
+                    //             branches[j].seats--;
+                    //         }
+                    //         else if(branches[j].seats == 0){
+                    //             strcpy(students[i].branchAllocated, "No Branch Allocated");
+                    //             break;
+                    //         }
                         
-                        }
-                        if(branchFlag){
+                    //     }
+                    //     if(branchFlag){
 
-                            if(branches[pref_index].seats>0) branches[pref_index].seats--;
-                            else if(branches[j].seats == 0){
-                                strcpy(students[i].branchAllocated, "No Branch Allocated");
-                                break;
-                            }
-                        }
+                    //         if(branches[pref_index].seats>0) branches[pref_index].seats--;
+                    //         else if(branches[j].seats == 0){
+                    //             strcpy(students[i].branchAllocated, "No Branch Allocated");
+                    //             break;
+                    //         }
+                    //     }
                         
-                            // Update the CSV file with the updated seats information
-                            FILE* file = fopen(CSV_FILENAME, "w");
-                            if (file == NULL) {
-                                printf("Error opening file %s for updating seats.\n", CSV_FILENAME);
-                                exit(1);
-                            }
+                    //         // Update the CSV file with the updated seats information
+                    //         FILE* file = fopen(CSV_FILENAME, "w");
+                    //         if (file == NULL) {
+                    //             printf("Error opening file %s for updating seats.\n", CSV_FILENAME);
+                    //             exit(1);
+                    //         }
 
-                            // Write header
-                            fprintf(file, "Branch,Cutoff,Seats\n");
+                    //         // Write header
+                    //         fprintf(file, "Branch,Cutoff,Seats\n");
 
-                            // Write updated branch information
-                            for (int k = 0; k < num_branches; k++) {
-                                fprintf(file, "%s,%d,%d\n", branches[k].name, branches[k].cutoff, branches[k].seats);
-                            }
+                    //         // Write updated branch information
+                    //         for (int k = 0; k < num_branches; k++) {
+                    //             fprintf(file, "%s,%d,%d\n", branches[k].name, branches[k].cutoff, branches[k].seats);
+                    //         }
+                    //         fclose(file);
 
-                            fclose(file);
-
-                    }
+                    // }
                     
                     // Exit loop after allocation or removal
                     preference_index = j;
@@ -365,6 +365,8 @@ void allocate_branches_to_students(Student students[], int num_students, Branch 
                 }
             }
             if (preference_index != -1) break; // Allocation or removal successful, exit loop
+            
+            
         }
     }
     fclose(students_file);
