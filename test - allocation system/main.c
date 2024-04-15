@@ -25,6 +25,7 @@ int main() {
     allocate_branches_to_students(students, num_students, branches, num_branches, cutoff_veb);
 
     // Write allocated branches along with student roll numbers and marks to a new CSV file
+    // write_allocated_branches_to_csv(students, num_students);
     if(!rollflag_inCSV) write_allocated_branches_to_csv(students, num_students);
 
     // void print_allocated_roll_numbers(students, num_students, branches, num_branches, cutoff_veb) {
