@@ -253,13 +253,13 @@ void allocate_branches_to_students(Student students[], int num_students, Branch 
         while (fscanf(allocated_file, "%d,%d,%[^\n]", &roll,&marks, alllocated) == 3 || fscanf(students_file, "%d,%d,%[^\n]", &studentRoll,&stdMarks, stdAllocated) == 3 ) {
         // printf(CYAN"std roll -> %d\n"RESET, studentRoll);
             if(roll == students[i].roll){
-                printf("duplicate roll -> %d\n", roll);
+                printf(GRAY"duplicate roll -> %d\n"RESET, roll);
                 // printf("duplicate roll 2 -> %d\n", students[i].roll);
                 rollflag_inCSV = 1;
                 break;
             }
             if (roll != studentRoll) {
-                printf(RED"new roll -> %d\n"RESET, studentRoll);
+                printf(YELLOW"new roll -> %d\n"RESET, studentRoll);
                 rollflag_inCSV = 0;
                 break;
             }
