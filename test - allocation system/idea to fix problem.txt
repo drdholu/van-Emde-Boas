@@ -5,5 +5,6 @@ when writing into csv file, fetch from sql
 
 when running allocation function for second time
 	skip repeated rolls (this will not store any branch in students structure but sql still has the data)
+	fn. will work for newly added students, store branch in sql
 
 when writing into csv file, fetch from sql
