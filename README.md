@@ -16,15 +16,15 @@ The van Emde Boas Tree, commonly known as vEB tree, is a powerful data structure
 
 vEB trees employ a divide and conquer strategy, recursively partitioning the universe into smaller segments and utilizing summary and cluster structures to achieve fast lookup times.
 
-## Time Complexities
+### Time Complexities
 
-- **Insertion/Deletion**: \(O(\log \log U)\)
-- **Predecessor/Successor Query**: \(O(\log \log U)\)
-- **Minimum/Maximum Query**: \(O(1)\)
+- **Insertion/Deletion**: O(log(log U))
+- **Predecessor/Successor Query**: O(log (log U))
+- **Minimum/Maximum Query**: O(1)
 
 These complexities enable efficient operations over large ranges of integers.
 
-## Function Implementation
+### Function Implementation
 
 vEB trees include functions for:
 
@@ -33,11 +33,11 @@ vEB trees include functions for:
 - Finding predecessor/successor
 - Finding minimum/maximum
 
-## Comparison with Other Structures
+### Comparison with Other Structures
 
 Compared to BSTs, vEB trees offer significantly faster lookup and query times, making them ideal for large integer ranges.
 
-## Applications
+### Applications
 
 vEB trees find applications in:
 
@@ -50,7 +50,7 @@ vEB trees find applications in:
 
 In our application, we leverage vEB trees to efficiently allocate branches to students based on their marks and preferences. We update available seats for each branch and write allocated branches along with student details to a CSV file.
 
-## Functions Used
+### Functions Used
 1. **create**: Creates a new vEB tree with the specified universe size.
 2. **insert**: Inserts an element into the vEB tree.
 3. **delete**: Deletes an element from the vEB tree.
@@ -58,3 +58,6 @@ In our application, we leverage vEB trees to efficiently allocate branches to st
 5. **maximum**: Finds the maximum element in the vEB tree.
 6. **predecessor**: Finds the predecessor of a given element in the vEB tree.
 7. **read_branch_data_from_csv**: Reads branch data from a CSV file and populates the `Branch` array.
+8. **read_student_data_from_csv**
+9. **allocate_branches_to_students**
+10. **write_allocated_branches_to_csv**

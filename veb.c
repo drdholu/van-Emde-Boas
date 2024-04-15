@@ -130,7 +130,7 @@ int vEB_successor(vEBTree* tree, int x) {
         int max_low = tree->clusters[high_x]->max;
         if (max_low != EMPTY && low_x < max_low) {
             int offset = vEB_successor(tree->clusters[high_x], low_x);
-            return get_index(tree, high_x, offset);
+            return get_index(tree, high_x, offset); // offset here is 'j -> low_x'
         } else {
             if (tree->summary != NULL && high_x < tree->summary->max) {
                 int succ_cluster = vEB_successor(tree->summary, high_x);

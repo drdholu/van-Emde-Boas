@@ -4,6 +4,8 @@
 #include <math.h>
 #include "veb.h"
 
+
+// check to prevent re-seat allocation to same students
 int rollflag_inCSV = 0;
 
 void swap(int* a, int* b) {
@@ -221,7 +223,7 @@ void read_student_data_from_csv(Student students[], int* num_students) {
     }
     fclose(file);
 
-    printf("Read %d students.\n", *num_students);
+    printf(RED"Read %d students.\n"RESET, *num_students);
 }
 
 void allocate_branches_to_students(Student students[], int num_students, Branch branches[], int num_branches, vebtree* cutoff_veb) {
