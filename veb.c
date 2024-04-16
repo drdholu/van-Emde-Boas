@@ -91,35 +91,6 @@ void vEB_delete(vEBTree* tree, int x) {
     }
 }
 
-// int vEB_successor(vEBTree* tree, int x) {
-//     if (tree->universe_size == 2) {
-//         if (x == 0 && tree->max == 1) {
-//             return 1;
-//         } else {
-//             return EMPTY;
-//         }
-//     } else if (tree->min != EMPTY && x < tree->min) {
-//         return tree->min;
-//     } else {
-//         int high_x = high(tree, x);
-//         int low_x = low(tree, x);
-//         int max_low = tree->clusters[high_x]->max;
-//         if (max_low != EMPTY && low_x < max_low) {
-//             int offset = vEB_successor(tree->clusters[high_x], low_x);
-//             return get_index(tree, high_x, offset);
-//         } else {
-//             int succ_cluster;
-//             if (tree->summary != NULL && high_x < tree->summary->max) {
-//                 succ_cluster = vEB_successor(tree->summary, high_x);
-//                 int offset = tree->clusters[succ_cluster]->min;
-//                 return get_index(tree, succ_cluster, offset);
-//             } else {
-//                 return EMPTY;
-//             }
-//         }
-//     }
-// }
-
 // Algo from MIT_OCW_VEB
 int vEB_successor(vEBTree* tree, int x) {
     if (tree->min != EMPTY && x < tree->min) {
@@ -142,36 +113,6 @@ int vEB_successor(vEBTree* tree, int x) {
         }
     }
 }
-
-
-// int vEB_predecessor(vEBTree* tree, int x) {
-//     if (tree->universe_size == 2) {
-//         if (x == 1 && tree->min == 0) {
-//             return 0;
-//         } else {
-//             return EMPTY;
-//         }
-//     } else if (tree->max != EMPTY && x > tree->max) {
-//         return tree->max;
-//     } else {
-//         int high_x = high(tree, x);
-//         int low_x = low(tree, x);
-//         int min_low = tree->clusters[high_x]->min;
-//         if (min_low != EMPTY && low_x > min_low) {
-//             int offset = vEB_predecessor(tree->clusters[high_x], low_x);
-//             return get_index(tree, high_x, offset);
-//         } else {
-//             int pred_cluster;
-//             if (tree->summary != NULL && high_x > tree->summary->min) {
-//                 pred_cluster = vEB_predecessor(tree->summary, high_x);
-//                 int offset = tree->clusters[pred_cluster]->max;
-//                 return get_index(tree, pred_cluster, offset);
-//             } else {
-//                 return tree->min != EMPTY && x > tree->min ? tree->min : EMPTY;
-//             }
-//         }
-//     }
-// }
 
 // Algo from MIT_OCW_VEB
 int vEB_predecessor(vEBTree* tree, int x) {
